@@ -1,0 +1,82 @@
+version: "3.8"
+
+services:
+  api-gateway:
+    build:
+      context: ./api-gateway
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    networks:
+      - cafe-network
+    depends_on:
+      - menu-services
+      - order-services
+      - payment-services
+      - inventory-services
+      - customer-services
+
+  menu-services:
+    build:
+      context: ./menu-services
+      dockerfile: Dockerfile
+    networks:
+      - cafe-network
+    depends_on:
+      - mongodb
+
+  order-services:
+    build:
+      context: ./order-services
+      dockerfile: Dockerfile
+    networks:
+      - cafe-network
+    depends_on:
+      - mongodb
+      - menu-services
+      - inventory-services
+      - customer-services
+
+  payment-services:
+    build:
+      context: ./payment-services
+      dockerfile: Dockerfile
+    networks:
+      - cafe-network
+    depends_on:
+      - mongodb
+      - order-services
+
+  inventory-services:
+    build:
+      context: ./inventory-services
+      dockerfile: Dockerfile
+    networks:
+      - cafe-network
+    depends_on:
+      - mongodb
+
+  customer-services:
+    build:
+      context: ./customer-services
+      dockerfile: Dockerfile
+    networks:
+      - cafe-network
+    depends_on:
+      - mongodb
+
+  mongodb:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+    networks:
+      - cafe-network
+
+networks:
+  cafe-network:
+    driver: bridge
+
+volumes:
+  mongodb-data:
