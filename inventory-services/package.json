@@ -10,6 +10,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^5.1.0",
+    "inventory-services": "file:",
     "kafkajs": "^2.2.4",
     "mongoose": "^8.13.2"
   }

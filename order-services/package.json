@@ -12,6 +12,7 @@
     "axios": "^1.8.4",
     "express": "^5.1.0",
     "kafkajs": "^2.2.4",
-    "mongoose": "^8.13.2"
+    "mongoose": "^8.13.2",
+    "order-services": "file:"
   }
 }

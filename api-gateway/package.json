@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "api-gateway": "file:",
     "express": "^5.1.0",
     "http-proxy-middleware": "^3.0.5"
   }
